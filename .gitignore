@@ -1,0 +1,15 @@
+# Python Virtual Environment
+venv/
+
+# Secret credentials
+.env
+
+# Python caches
+__pycache__/
+*.pyc
+
+# VS Code settings
+.vscode/
+
+# Temporary files
+uploads/
