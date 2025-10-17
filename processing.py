@@ -46,7 +46,7 @@ def chunk_text(text: str, chunk_size=1000, chunk_overlap=200) -> list[str]:
 def extract_knowledge_with_llm(text_chunk: str, model_name="llama-3.1-8b-instant"):
     """Uses the Groq API to extract entities and relationships from a text chunk."""
 
-    # --- DEFINE IT HERE ---
+    
     system_prompt = """
     You are an expert in knowledge graph construction. From the text below, extract key entities and the relationships between them.
     Format the output as a single, raw JSON object with two keys: "nodes" and "relationships".
