@@ -43,8 +43,10 @@ def chunk_text(text: str, chunk_size=1000, chunk_overlap=200) -> list[str]:
 
 # --- 3. KNOWLEDGE GRAPH FUNCTIONS (UPDATED FOR GROQ) ---
 
-def extract_knowledge_with_llm(text_chunk: str, model_name="llama3-8b-8192"):
+def extract_knowledge_with_llm(text_chunk: str, model_name="llama-3.1-8b-instant"):
     """Uses the Groq API to extract entities and relationships from a text chunk."""
+
+    # --- DEFINE IT HERE ---
     system_prompt = """
     You are an expert in knowledge graph construction. From the text below, extract key entities and the relationships between them.
     Format the output as a single, raw JSON object with two keys: "nodes" and "relationships".
@@ -52,18 +54,18 @@ def extract_knowledge_with_llm(text_chunk: str, model_name="llama3-8b-8192"):
     - "relationships" should be a list of objects, each with a "source", "target", and "type".
     Do not include any text or explanations outside of the JSON object.
     """
-    
+
     user_prompt = f"Text to analyze:\n---\n{text_chunk}\n---"
 
     try:
         response = groq_client.chat.completions.create(
             model=model_name,
             messages=[
-                {"role": "system", "content": system_prompt},
+                {"role": "system", "content": system_prompt}, # <-- USE IT HERE (check spelling!)
                 {"role": "user", "content": user_prompt}
             ],
             temperature=0,
-            response_format={"type": "json_object"} # Use Groq's JSON mode for reliable output
+            response_format={"type": "json_object"}
         )
         json_response_text = response.choices[0].message.content
         return json.loads(json_response_text)
