@@ -32,7 +32,7 @@ def evaluate_knowledge_extraction():
     """
     print("Loading SciERC dataset from Hugging Face...")
     try:
-        dataset = load_dataset("tomaarsen/scierc", "scierc", split="test")
+        dataset = load_dataset("scierc", "scierc", split="test")
     except Exception as e:
         print(f"Failed to load dataset. Check your internet connection. Error: {e}")
         return
